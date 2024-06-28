@@ -51,21 +51,81 @@ th {
 }
 
 /* Estilos para pantallas más pequeñas (por ejemplo, hasta 992px de ancho) */
-@media (max-width: 992px) {
+@media (max-width: 768) {
   body{
     background-color: orange;
   }
-  th:nth-child(4), td:nth-child(4) {
-    display: none; /* Oculta la cuarta columna */
+  th, td{
+    display: none;
   }
-  
+
+  th:nth-child(1), td:nth-child(1) {
+    display: table-cell; /* Oculta la tercera columna */
+  }
+  th:nth-child(2), td:nth-child(2) {
+    display: table-cell; /* Oculta la quinta columna */
+  }
+  th:nth-child(3), td:nth-child(3) {
+    display: table-cell; /* Oculta la quinta columna */
+  }
+  th:nth-child(4), td:nth-child(4) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(5), td:nth-child(5) {
+    display: none; /* Oculta la quinta columna */
+  }
   th:nth-child(6), td:nth-child(6) {
-    display: none; /* Oculta la sexta columna */
+    display: table-cell; /* Oculta la quinta columna */
+  }
+  th:nth-child(7), td:nth-child(7) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(8), td:nth-child(8) {
+    display: table-cell; /* Oculta la quinta columna */
+  }
+  th:nth-child(9), td:nth-child(9) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(11), td:nth-child(11) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(12), td:nth-child(12) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(13), td:nth-child(13) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(14), td:nth-child(14) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(15), td:nth-child(15) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(16), td:nth-child(16) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(17), td:nth-child(17) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(18), td:nth-child(18) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(19), td:nth-child(19) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(20), td:nth-child(20) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(21), td:nth-child(21) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(22), td:nth-child(22) {
+    display: none; /* Oculta la quinta columna */
   }
 }
 
 /* Estilos para pantallas más pequeñas aún (por ejemplo, hasta 600px de ancho) */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   body{
     background-color: lightcoral;
   }
@@ -75,14 +135,66 @@ th {
   th:nth-child(1), td:nth-child(1) {
     display: table-cell; /* Oculta la tercera columna */
   }
-  
   th:nth-child(2), td:nth-child(2) {
     display: table-cell; /* Oculta la quinta columna */
   }
-  th:nth-child(8), td:nth-child(8) {
-    display: table-cell; /* Oculta la quinta columna */
+  th:nth-child(3), td:nth-child(3) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(4), td:nth-child(4) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(5), td:nth-child(5) {
+    display: none; /* Oculta la quinta columna */
   }
   th:nth-child(6), td:nth-child(6) {
     display: table-cell; /* Oculta la quinta columna */
   }
+  th:nth-child(7), td:nth-child(7) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(8), td:nth-child(8) {
+    display: table-cell; /* Oculta la quinta columna */
+  }
+  th:nth-child(9), td:nth-child(9) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(11), td:nth-child(11) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(12), td:nth-child(12) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(13), td:nth-child(13) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(14), td:nth-child(14) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(15), td:nth-child(15) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(16), td:nth-child(16) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(17), td:nth-child(17) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(18), td:nth-child(18) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(19), td:nth-child(19) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(20), td:nth-child(20) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(21), td:nth-child(21) {
+    display: none; /* Oculta la quinta columna */
+  }
+  th:nth-child(22), td:nth-child(22) {
+    display: none; /* Oculta la quinta columna */
+  }
+  
+
 }
