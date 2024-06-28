@@ -1,7 +1,11 @@
-fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTlAJXDac7kQ4rgQM57RjLmbKw1KaAzL0XMIEFWanLVn7rQSGqXQy5bFxLTnxYB3Q/pub?output=csv')
+fetch('URL_DEL_ARCHIVO_PUBLICO_DE_GOOGLE_SHEETS')
   .then(response => response.text())
   .then(data => {
+    console.log(data);
     const rows = data.split('\n');
+    
+    // Omitir la primera fila que contiene los encabezados
+    rows.shift();
     
     rows.forEach(row => {
       const playerData = row.split(',');
