@@ -1,4 +1,4 @@
-fetch('URL_DEL_ARCHIVO_PUBLICO_DE_GOOGLE_SHEETS')
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTlAJXDac7kQ4rgQM57RjLmbKw1KaAzL0XMIEFWanLVn7rQSGqXQy5bFxLTnxYB3Q/pub?output=csv')
   .then(response => response.text())
   .then(data => {
     console.log(data);
