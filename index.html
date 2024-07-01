@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Datos Interactiva</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        th:hover {
+            background-color: #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        #error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .card {
+            display: none;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+        }
+        .card div {
+            margin-bottom: 5px;
+        }
+        .card-label {
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tabla de Datos Interactiva</h1>
+        <input type="text" id="search" placeholder="Buscar...">
+        <table id="dataTable">
+            <thead>
+                <tr id="headerRow"></tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <div id="error-message"></div>
+    </div>
+
+    <script>
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdSHbV58pvz1mflTyHvgwgCB4gEQ38PHsqw30q0tLocoES5RcypT9OVLkjQdlQsUx0r_NpcRxvtB5s/pub?output=csv';
+        let data = [];
+        let sortColumn = '';
+        let sortDirection = 1;
+        const columnsToShow = ['First Name', 'Last Name', 'Nationality', 'Club', 'Position', 'Rating'];
+
+        async function loadData() {
+            try {
+                const response = await fetch(csvUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvData = await response.text();
+                const parsedData = Papa.parse(csvData, { header: true }).data;
+                data = parsedData.map(row => {
+                    return columnsToShow.reduce((obj, key) => {
+                        obj[key] = row[key];
+                        return obj;
+                    }, {});
+                });
+                if (data.length > 0) {
+                    renderTable(data);
+                    setupHeaderRow();
+                } else {
+                    throw new Error('No se encontraron datos en el CSV');
+                }
+            } catch (error) {
+                console.error('Error al cargar los datos:', error);
+                document.getElementById('error-message').textContent = `Error al cargar los datos: ${error.message}`;
+            }
+        }
+
+        function renderTable(dataToRender) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            dataToRender.forEach(row => {
+                const tr = document.createElement('tr');
+                columnsToShow.forEach(column => {
+                    const td = document.createElement('td');
+                    td.textContent = row[column];
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function setupHeaderRow() {
+            const headerRow = document.getElementById('headerRow');
+            headerRow.innerHTML = '';
+            columnsToShow.forEach(column => {
+                const th = document.createElement('th');
+                th.textContent = column;
+                th.addEventListener('click', () => sortTable(column));
+                headerRow.appendChild(th);
+            });
+        }
+
+        function sortTable(column) {
+            if (sortColumn === column) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = column;
+                sortDirection = 1;
+            }
+            data.sort((a, b) => {
+                if (a[column] < b[column]) return -1 * sortDirection;
+                if (a[column] > b[column]) return 1 * sortDirection;
+                return 0;
+            });
+            renderTable(data);
+        }
+
+        function filterTable() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const filteredData = data.filter(row => 
+                Object.values(row).some(value => 
+                    value.toLowerCase().includes(searchTerm)
+                )
+            );
+            renderTable(filteredData);
+        }
+
+        document.getElementById('search').addEventListener('input', filterTable);
+
+        loadData();
+    </script>
+</body>
+</html>
